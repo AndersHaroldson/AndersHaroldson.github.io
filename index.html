@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        body {
+            background: linear-gradient(-45deg, #004DFF, #005CFF, #00C9FF, #00FF65, #23d5ab);
+            /*background: linear-gradient(-45deg, #004DFF, #005CFF, #00C9FF, #00FF65, #23d5ab);*/
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-top: 25%;
+        }
+
+        #notes {
+            margin-top: 25%;
+            margin-left: 80%;
+            background-color: transparent;
+            border-color: white;
+            border-width: thin;
+            color: white;
+        }
+
+        #clock {
+            width: 100%;
+            position: absolute;
+            font-size: 4vw;
+            color: white;
+            text-align: right;
+            font-family: 'Roboto', sans-serif;
+            margin-left: -1%;
+
+        }
+
+        #date {
+            width: 100%;
+            position: absolute;
+            font-size: 4vw;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body onload="realtimeClock(), date()">
+    <div class="main-container">
+
+        <div id="clock"></div>
+        <div id="date"></div>
+        <textarea id="notes" name="notes" rows="4" cols="50"></textarea>
+    </div>
+
+
+    <script type="text/javascript">
+        function realtimeClock() {
+
+            var rtClock = new Date();
+
+            var hours = rtClock.getHours();
+            var minutes = rtClock.getMinutes();
+            var seconds = rtClock.getSeconds();
+
+
+
+            var amPm = (hours < 12) ? "AM" : "PM";
+
+
+            hours = (hours > 12) ? hours - 12 : hours;
+
+
+
+            hours = ("0" + hours).slice(-2);
+            minutes = ("0" + minutes).slice(-2);
+            seconds = ("0" + seconds).slice(-2);
+
+
+            document.getElementById('clock').innerHTML =
+                "| " + hours + "  :  " + minutes + "  :  " + seconds + " " + amPm + " |";
+            var t = setTimeout(realtimeClock, 500);
+        }
+        function date() {
+            var d = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "| Sunday |";
+            weekday[1] = "| Monday |";
+            weekday[2] = "| Tuesday |";
+            weekday[3] = "| Wednesday |";
+            weekday[4] = "| Thursday |";
+            weekday[5] = "| Friday |";
+            weekday[6] = "| Saturday |";
+
+            var n = weekday[d.getDay()];
+            document.getElementById('date').innerHTML = n;
+        }
+    </script>
+</body>
+
+</html>
